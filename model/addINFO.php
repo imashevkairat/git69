@@ -1,9 +1,9 @@
 <?php
 
-class addINFO{
-
-
+class addINFO
+{
     public $pdo;
+    public $words;
 
     public function  __construct()
     {
@@ -19,7 +19,7 @@ class addINFO{
         $query->bindParam(":c", $qty);
         $query->execute();
 
-        header("Location: /");
+//        header("Location: /");
 
     }
 
@@ -33,6 +33,28 @@ class addINFO{
             $result[$i]['name'] = $row['name'];
             $result[$i]['price'] = $row['price'];
             $result[$i]['qty'] = $row['qty'];
+            $i++;
+        }
+        return $result;
+    }
+
+    public function searchPost()
+    {
+        $query_search = '';
+        $arrayWords = explode(' ',$this->words);
+        foreach ($arrayWords as $key => $value)
+        {
+            if ($arrayWords[$key - 1])
+            $query_search .= ' OR ';
+            $query_search .= '`name` LIKE "%'.$value.'%"';
+        }
+        $query = "SELECT * FROM `products` WHERE $query_search";
+        $link = $this->pdo->query($query);
+        $result = [];
+        $i = 0;
+        while ($row = $link->fetch())
+        {
+            $result[$i] = $row;
             $i++;
         }
         return $result;
