@@ -38,10 +38,13 @@ class addINFO
         return $result;
     }
 
-    public function searchPost()
+    public function searchPost($words)
     {
+
+     //  print_r($words);die;
+
         $query_search = '';
-        $arrayWords = explode(' ',$this->words);
+        $arrayWords = explode(' ',$words);
         foreach ($arrayWords as $key => $value)
         {
             if ($arrayWords[$key - 1])
@@ -57,6 +60,8 @@ class addINFO
             $result[$i] = $row;
             $i++;
         }
+//        echo "<pre>";
+//        print_r($result);die;
         return $result;
     }
 }

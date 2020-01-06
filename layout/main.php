@@ -16,12 +16,23 @@
 
         <?php endforeach;?>
 </div>
-<form method="post">
+<form method="post" action="/store.php">
     <input type="text" name="words">
     <button type="submit" name="search">search</button>
 </form>
 <?php
-$post->words = $_POST['words'];
+//$post = new addINFO();
+//$post->searchPost($_POST['words']);
+$post = new addINFO();
+
+
+
+//echo "<pre>";
+//print_r($post->searchPost($words));
+
+
+
+
 if (isset($_POST['search']))
 {
     if (count($post->searchPost()) == 0)
