@@ -22,4 +22,19 @@ class addINFO{
         header("Location: /");
 
     }
+
+    public function getPost()
+    {
+        $link = $this->pdo->query("SELECT * FROM `products`");
+        $result = [];
+        $i = 0;
+        while ($row = $link->fetch(PDO::FETCH_ASSOC))
+        {
+            $result[$i]['name'] = $row['name'];
+            $result[$i]['price'] = $row['price'];
+            $result[$i]['qty'] = $row['qty'];
+            $i++;
+        }
+        return $result;
+    }
 }
